@@ -90,10 +90,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DBNAME'),
+        'HOST': os.environ.get('DBHOST'),
+        'USER': os.environ.get('DBUSER'),
+        'PASSWORD': os.environ.get('DBPASS'),
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
 
@@ -136,51 +147,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'info@foreseeed.app'
-# EMAIL_HOST_PASSWORD = 'hQ8kY7cJ9oR5lV4uM6aW7gK3y'
-# aws ses
-# EMAIL_BACKEND = 'django_ses.SESBackend'
-
-# EMAIL_HOST_USER = 'umairashraf5252@gmail.com'
-# EMAIL_HOST_PASSWORD = 'fich bztb gorg aqvj'
-
-
-# aws ses
-
-
-AWS_ACCESS_KEY_ID = 'AKIA5G4TWVV6HZ6A5CBW'
-AWS_SECRET_ACCESS_KEY = '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'
-
-EMAIL_BACKEND = 'django_ses.SESBackend'
-AWS_SES_REGION_NAME = 'us-east-1'
-AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
-
-EMAIL_HOST = 'email.us-east-1.amazonaws.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'info@foreseeed.app'
-
-
-
-# 150752513421-9n0stimemkh8faruom1rpiovnh27hgs7.apps.googleusercontent.com
-# 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
-
 
 
 

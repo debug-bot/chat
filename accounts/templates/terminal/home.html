@@ -1,0 +1,29 @@
+{% extends "terminal/base.html"%} {% block content %}
+
+<div class="main-c">
+<!-- Chats container -->
+<div class="chat-container"></div>
+
+<!-- Typing container -->
+<div class="typing-container">
+	<div class="typing-content">
+		<div class="typing-textarea">
+			<textarea
+				id="chat-input"
+				spellcheck="false"
+				placeholder="Enter a command here"
+				required
+			></textarea>
+			<span id="send-btn" class="material-symbols-rounded">send</span>
+			<input type="hidden" id="csrf-token" value="{{ csrf_token }}" />
+		</div>
+		<div class="typing-controls">
+			<span id="theme-btn" class="material-symbols-rounded"
+				>light_mode</span
+			>
+			<span id="delete-btn" class="material-symbols-rounded">delete</span>
+		</div>
+	</div>
+</div>
+<div>
+{% endblock %}

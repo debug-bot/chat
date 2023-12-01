@@ -1,0 +1,127 @@
+{% extends "home-base.html"%} {% csrf_token %} {% block content %} {% comment %}
+<div class="text-center">
+	<h1>Welcome..</h1>
+	<a href="/logout/" class="btn btn-danger">Logout</a>
+</div>
+{% endcomment %}
+
+<!-- Chats container -->
+<!-- Bootstrap modal -->
+<div class="chat-container"></div>
+
+<!-- Typing container -->
+<div
+	class="typing-container d-flex flex-column justify-content-center align-items-center"
+>
+	<div class="d-flex flex-column justify-content-start">
+		<div id="cd" class="d-block bg-success p-3 rounded mb-3">
+			<div class="d-flex justify-content-between">
+				<p class="text-light me-3">
+					Before we can start, let me know which sources you want to
+					use for your topic.
+				</p>
+				<span class="material-symbols-rounded text-dark close-btn"
+					>close</span
+				>
+			</div>
+			<div>
+				<button class="btn btn-dark btn-sm">option1</button>
+				<button class="btn btn-dark btn-sm mx-3">option2</button>
+				<button id="upload_file" class="btn btn-dark btn-sm">upload</button>
+			</div>
+		</div>
+		<div id="cd" class="d-block bg-success p-3 rounded mb-3">
+			<div class="d-flex justify-content-between">
+				<p class="text-light me-3">Upload max. 20 PDF documents</p>
+				<span class="material-symbols-rounded text-dark close-btn"
+					>close</span
+				>
+			</div>
+			<div>
+				<button class="btn btn-dark btn-sm">upload</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="typing-content">
+		<div class="typing-textarea">
+			<textarea
+				id="chat-input"
+				spellcheck="false"
+				placeholder="Enter a command here"
+				required
+			></textarea>
+			<span id="send-btn" class="material-symbols-rounded">send</span>
+			<input type="hidden" id="csrf-token" value="{{ csrf_token }}" />
+		</div>
+		<div class="typing-controls">
+			<span id="theme-btn" class="material-symbols-rounded"
+				>light_mode</span
+			>
+			<input type="file" id="fileInput" style="display: none" />
+			<span id="delete-btn" class="material-symbols-rounded">delete</span>
+			<span
+				data-toggle="modal"
+				data-target="#myModal"
+				class="material-symbols-rounded open-modal"
+				>settings</span
+			>
+		</div>
+	</div>
+</div>
+<!-- Bootstrap Modal -->
+<div class="modal" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Settings</h4>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<!-- Content goes here -->
+				Your settings content here...
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	// JavaScript code
+	document
+		.getElementById("upload_file")
+		.addEventListener("click", function () {
+			document.getElementById("fileInput").click();
+		});
+
+	document
+		.getElementById("fileInput")
+		.addEventListener("change", function () {
+			const selectedFile = this.files[0];
+			const selectedFileNameDisplay =
+				document.getElementById("selectedFileName");
+
+			if (selectedFile) {
+				selectedFileNameDisplay.textContent = `Selected file: ${selectedFile.name}`;
+			} else {
+				selectedFileNameDisplay.textContent = "No file selected";
+			}
+
+			// You can add further actions here, like file upload or processing
+		});
+</script>
+<script>
+	// JavaScript to trigger the modal
+	$(document).ready(function () {
+		$(".open-modal").click(function () {
+			$("#myModal").modal("show");
+		});
+	});
+</script>
+{% endblock %}
